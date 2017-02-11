@@ -1,0 +1,62 @@
+<div class="jumbotron">
+    <h1 class="text-center">Listagem de usuários</h1>
+   
+</div>
+<div class="container">
+    
+    <div class="row">
+   <p *ngIf="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+        <div class="col-md-12">
+            <form>
+                 <div class="input-group">
+                    <span class="input-group-btn">
+                         
+                        <a class="btn btn-primary">
+                            Nova foto
+                        </a>
+                    </span>
+                    <input class="form-control" #textoProcurado (keyup)="0" placeholder="filtrar pelo título da foto">
+                </div> 
+            </form>
+        </div> <!-- fim col-md-12 -->
+    </div> <!-- fim row -->
+    <br>
+
+    <div class="row">
+        <painel #painel *ngFor="let foto of fotos | filtroPorTitulo: textoProcurado.value" titulo="{{foto.first_name | uppercase}}" lastName="{{foto.last_name | uppercase}}"  class="col-md-2">
+            
+            <a [routerLink] = "['/cadastro', foto.id]">
+            <foto titulo="{{foto.first_name}}" url="{{foto.avatar}}">
+            </foto>
+            </a>
+            
+            <!--
+            <button class="btn btn-danger btn-block" (click)="remove(foto)">Remover</button>
+-->
+</painel>
+    </div><!-- fim row -->
+<div class="col-md-12 centralizar">
+    <div class="row centralizar">
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li *ngFor="let pagina of paginacao" class="page-item"><a class="page-link" href="{{pagina.pagina}}">{{pagina.pagina}}</a></li>
+    
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+</div>
+</div>
+
+</div>
